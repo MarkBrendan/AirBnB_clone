@@ -38,10 +38,10 @@ class BaseModel:
     def to_dict(self):
         """returns a dictionary containing all keys/values of\
                 __dict__ of the instance"""
-        dict_to = self.__dict__.copy()
-        dict_to['__class__'] = self.__class__.__name__
-        if self.created_at in dict_to:
-            dict_to['created_at'] = self.created_at.isoformat()
-        if self.updated_at in dict_to:
-            dict_to['updated_at'] = self.updated_at.isoformat()
-        return dict_to
+        to_json = self.__dict__.copy()
+        to_json['__class__'] = self.__class__.__name__
+        if self.created_at in to_json:
+            to_json['created_at'] = self.created_at.isoformat()
+        if self.updated_at in to_json:
+            to_json['updated_at'] = self.updated_at.isoformat()
+        return to_json
