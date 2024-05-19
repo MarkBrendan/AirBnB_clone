@@ -17,7 +17,7 @@ class FileStorage:
     def new(self, obj):
         """ sets in __objects the obj with key <obj class name>.id"""
         key = "{}.{}".format(obj.__class__.__name__, obj.id)
-        self.__objects.update({key:obj})
+        self.__objects.update({key: obj})
 
     def save(self):
         """Serialize __objects to the JSON file __file_path."""
@@ -39,7 +39,6 @@ class FileStorage:
             if (obj_name == k):
                 new_obj = classes[k](**dicts)
         return new_obj
-
 
     def reload(self):
         try:
