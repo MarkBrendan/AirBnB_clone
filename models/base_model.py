@@ -25,6 +25,7 @@ class BaseModel:
                         self.__dict__[key] = v
         else:
             storage.new(self)
+
     def __str__(self):
         return f"[{__class__.__name__}] ({self.id}) {self.__dict__}"
 
