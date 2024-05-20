@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """ class file_storage module"""
 import json
+import os
 
 
 class FileStorage:
@@ -16,21 +17,28 @@ class FileStorage:
     def new(self, obj):
         """ sets in __objects the obj with key <obj class name>.id"""
         key = "{}.{}".format(obj.__class__.__name__, obj.id)
-        FileStorage.__objects[key] = obj
+        FileStorage.__objects.update({key: obj})
 
     def save(self):
-        """Serialize __objects to the JSON file __file_path."""
-        with open(FileStorage.__file_path, 'w') as f:
-            objects_dicts = {}
-            for key, obj in FileStorage.__objects.items():
-                json.dump(objects_dicts, f)
+        """Serialzes __objects to JSON file."""
+        with open(FileStorage.__file_path, "w", encoding="utf-8") as f:
+            d = {k: v.to_dict() for k, v in FileStorage.__objects.items()}
+            json.dump(d, f)
+
+    def classes(self):
+        """Returns a dictionary of valid classes and their references."""
+        from models.base_model import BaseModel
+
+        classes = {"BaseModel": BaseModel}
+        return classes
 
     def reload(self):
-        try:
-            with open(FileStorage.__file_path, 'r') as f:
-                objects_dict = json.load(f)
-                for key, obj_dic in objects_dict.items():
-                    obj = BaseModel(**obj_dic)
-                    FileStorage.__objects[key] = obj
-        except (FileNotFoundError, json.decoder.JSONDecodeError):
-            pass
+        """Deserializes JSON file into __objects."""
+        if not os.path.isfile(FileStorage.__file_path):
+            return
+        with open(FileStorage.__file_path, "r", encoding="utf-8") as f:
+            obj_dict = json.load(f)
+            obj_dict = {k: self.classes()[v["__class__"]](**v)
+                        for k, v in obj_dict.items()}
+            # TODO: should this overwrite or insert?
+            FileStorage.__objects = obj_dict

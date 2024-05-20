@@ -1,7 +1,7 @@
 #!/usr/bin/python3
+""" Command interpreter module"""
 
 import cmd
-""" Command interpreter module"""
 
 
 class HBNBCommand(cmd.Cmd):
