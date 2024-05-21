@@ -9,7 +9,7 @@ This repository contains the initial stage of a student project to build a clone
 
 | Tasks | Files | Description |
 | ----- | ----- | ------ |
-| 0: Authors/README File | [AUTHORS](https://github.com/MarkBrendan/AirBnB_clone/) | Project authors |
+| 0: Authors/README File | [AUTHORS](https://github.com/MarkBrendan/AirBnB_clone/blob/main/AUTHORS) | Project authors |
 | 1: Pep8 | N/A | All code is pep8 compliant|
 | 2: Unit Testing | [/tests](https://github.com/MarkBrendan/AirBnB_clone/) | All class-defining modules are unittested |
 | 3. Make BaseModel | [/models/base_model.py](https://github.com/MarkBrendan/AirBnB_clone/) | Defines a parent class to be inherited by all model classes|
